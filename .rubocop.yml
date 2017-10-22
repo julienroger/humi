@@ -1,0 +1,195 @@
+## Rubocop configuration file
+
+require: rubocop-rspec
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
+
+# Common configuration.
+AllCops:
+  TargetRubyVersion: 2.4
+  # Include common Ruby source files.
+  Include:
+    - '**/*.gemspec'
+    - '**/*.rake'
+    - '**/Gemfile'
+    - '**/Rakefile'
+  Exclude:
+    - '.rubocop.yml'
+  # Cop names are not displayed in offense messages by default. Change behavior
+  # by overriding DisplayCopNames, or by giving the -D/--display-cop-names
+  # option.
+  DisplayCopNames: false
+  # Style guide URLs are not displayed in offense messages by default. Change
+  # behavior by overriding DisplayStyleGuide, or by giving the
+  # -S/--display-style-guide option.
+  DisplayStyleGuide: false
+  # Additional cops that do not reference a style guide rule may be enabled by
+  # default. Change behavior by overriding StyleGuideCopsOnly, or by giving
+  # the --only-guide-cops option.
+  StyleGuideCopsOnly: false
+
+Documentation:
+  Enabled: false
+
+##################### Metrics ##################################
+Metrics/AbcSize:
+  Severity: warning
+  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
+  # a Float.
+  Max: 25
+
+Metrics/BlockNesting:
+  Max: 3
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 100
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 100
+
+Metrics/CyclomaticComplexity:
+  Max: 6
+
+Metrics/LineLength:
+  Max: 120
+  # To make it possible to copy or click on URIs in the code, we allow lines
+  # contaning a URI to be longer than Max.
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+
+Metrics/MethodLength:
+  Severity: warning
+  CountComments: false
+  Max: 20
+
+Metrics/ParameterLists:
+  Max: 3
+  CountKeywordArgs: true
+
+Metrics/PerceivedComplexity:
+  Max: 6
+
+
+##################### Style ##################################
+Style/ClassAndModuleChildren:
+  Enabled: false
+  # Checks the style of children definitions at classes and modules.
+  #
+  # Basically there are two different styles:
+  #
+  # `nested` - have each child on a separate line
+  #   class Foo
+  #     class Bar
+  #     end
+  #   end
+  #
+  # `compact` - combine definitions as much as possible
+  #   class Foo::Bar
+  #   end
+  #
+  # The compact style is only forced, for classes / modules with one child.
+  EnforcedStyle: compact
+  SupportedStyles:
+    - nested
+    - compact
+
+Style/PredicateName:
+  Description: Check the names of predicate methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark
+  Enabled: true
+  NamePrefix:
+  - is_
+  - has_
+  - have_
+  NamePrefixBlacklist:
+  - is_
+  Exclude:
+  - spec/**/*
+
+Style/StringLiterals:
+  Description: Checks if uses of quotes match the configured preference.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
+  Enabled: true
+  EnforcedStyle: double_quotes
+  SupportedStyles:
+  - single_quotes
+  - double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Description: Checks if uses of quotes inside expressions in interpolated strings match the configured preference.
+  Enabled: true
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+  - single_quotes
+  - double_quotes
+
+Style/ClassCheck:
+  EnforcedStyle: is_a?
+  SupportedStyles:
+    - is_a?
+    - kind_of?
+
+# Align with the style guide.
+Style/CollectionMethods:
+  # Mapping from undesired method to desired_method
+  # e.g. to use `detect` over `find`:
+  #
+  # CollectionMethods:
+  #   PreferredMethods:
+  #     find: detect
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    find: 'detect'
+    find_all: 'select'
+    reduce: 'inject'
+
+# Checks formatting of special comments
+Style/CommentAnnotation:
+  Keywords:
+    - TODO
+    - FIXME
+    - OPTIMIZE
+    - HACK
+    - REVIEW
+
+
+###################### Layout ##################################
+# Multi-line method chaining should be done with leading dots.
+Layout/DotPosition:
+  EnforcedStyle: leading
+  SupportedStyles:
+    - leading
+    - trailing
+
+Layout/MultilineOperationIndentation:
+  Description: Checks indentation of binary operations that span multiple lines.
+  Enabled: true
+  EnforcedStyle: indented
+
+
+###################### Lint ##################################
+Lint/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+
+##################### RSpec ##################################
+RSpec/NestedGroups:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
