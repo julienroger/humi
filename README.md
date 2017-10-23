@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/cb16c704067bcc8023a9/maintainability)](https://codeclimate.com/github/julienroger/humi/maintainability)
+
 # Humi
 
 The Humi Ruby Gem is a Ruby client for the [Humi API](https://docs.humi.ca).
@@ -42,7 +44,7 @@ The client will use `refresh_token` automatically to request a new `access_token
 TODO
 
 ```ruby
-user = client.get_self(2)
+user = client.get_self
 ```
 
 ## Development
