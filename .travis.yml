@@ -9,8 +9,10 @@ rvm:
   - 2.3.4
   - 2.2
   - 2.1
-  - 2.0
   - ruby-head
   - jruby-head
 
 before_install: gem install bundler -v 1.15.4
+
+notifications:
+  email: false
