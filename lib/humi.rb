@@ -2,8 +2,6 @@ require "faraday"
 require "faraday_middleware"
 require "json"
 
-require "pry"
-
 require "humi/version"
 require "humi/config"
 require "humi/middleware"

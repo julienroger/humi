@@ -68,8 +68,8 @@ module Humi
     private def faraday_options
       {
         url: client.endpoint,
-        'headers' => {
-          'User-Agent' => Humi.user_agent
+        "headers" => {
+          "User-Agent" => Humi.user_agent
         }
       }
     end

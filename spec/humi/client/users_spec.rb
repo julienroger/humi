@@ -4,13 +4,13 @@ RSpec.describe Humi::Client do
   context ".new" do
     before do
       @client = Humi::Client.new(
-        client_id:     'CID',
-        client_secret: 'CS',
-        access_token:  'AT'
+        client_id:     "CID",
+        client_secret: "CS",
+        access_token:  "AT"
       )
     end
 
-    let(:json_header) { {'Content-Type' => 'application/json'} }
+    let(:json_header) { {"Content-Type" => "application/json"} }
 
     describe ".user" do
       context "with user ID" do
