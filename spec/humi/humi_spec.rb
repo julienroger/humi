@@ -1,9 +1,7 @@
 require "spec_helper"
 
 RSpec.describe Humi do
-  before do
-    Humi.reset
-  end
+  before { Humi.reset }
 
   context "using client" do
     before do
