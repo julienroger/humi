@@ -1,31 +1,24 @@
 module Humi
   module Request
-    def get(path, options = {}, **args)
-      request(:get, path, options, args)
+    def get(path, options = {})
+      request(:get, path, get_delete_headers, options)
     end
 
-    def post(path, options = {}, **args)
-      request(:post, path, options, args)
+    def post(path, options = {})
+      request(:post, path, post_put_headers, options)
     end
 
-    def put(path, options = {}, **args)
-      request(:put, path, options, args)
+    def put(path, options = {})
+      request(:put, path, post_put_headers, options)
     end
 
-    def delete(path, options = {}, **args)
-      request(:delete, path, options, args)
+    def delete(path, options = {})
+      request(:delete, path, get_delete_headers, options)
     end
 
-    private def request(method, path, options, args)
-      raw     = args.fetch(:raw, false)
-      retries = args.fetch(retries, auth_retries)
-
+    private def request(method, path, headers, options)
       begin
-
-        response = connection(raw).send(method) do |request|
-
-          path = formatted_path(path) unless args.fetch(:unformatted, true)
-
+        response = connection(headers).send(method) do |request|
           case method
           when :get, :delete
             request.url(URI.encode(path), options)
@@ -35,8 +28,6 @@ module Humi
           end
         end
 
-        return response      if raw
-        return response.body if args.fetch(:no_response_wrapper, false)
         return Response.create(response.body)
 
       rescue Humi::Unauthorized
@@ -48,8 +39,17 @@ module Humi
       end
     end
 
-    private def formatted_path(path)
-      [path, format].compact.join(".")
+    private def get_delete_headers
+      {
+        "Accept"     => "application/#{format}; charset=utf-8",
+        "User-Agent" => user_agent
+      }
+    end
+
+    private def post_put_headers
+      get_delete_headers.merge({
+        "Content-Type" => "application/#{format}; charset=utf-8"
+      })
     end
   end
 end
