@@ -3,13 +3,10 @@ Dir[File.expand_path("../middleware/*.rb", __FILE__)].each{|f| require f}
 
 module Humi
   module Connection
-    private def connection(raw = false)
+    private def connection(headers, raw = false)
       options = {
-        :headers => {
-          "Accept"     => "application/#{format}; charset=utf-8",
-          "User-Agent" => user_agent
-        },
-        :url => endpoint,
+        :url     => endpoint,
+        :headers => headers
       }.merge(connection_options)
 
       Faraday::Connection.new(options) do |connection|

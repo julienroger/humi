@@ -14,6 +14,8 @@ module Humi
 
       data.instance_exec do
         %w{fields}.each do |k|
+          next if response_hash.public_send(k).nil?
+
           response_hash.public_send(k).each do |key, value|
             instance_variable_set("@#{key}", value) if value
             singleton_class.class_eval { attr_reader key } if value

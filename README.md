@@ -1,6 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/cb16c704067bcc8023a9/maintainability)](https://codeclimate.com/github/julienroger/humi/maintainability)
-
-[![Build Status](https://travis-ci.org/julienroger/humi.svg?branch=development)](https://travis-ci.org/julienroger/humi)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cb16c704067bcc8023a9/maintainability)](https://codeclimate.com/github/julienroger/humi/maintainability) [![Build Status](https://travis-ci.org/julienroger/humi.svg?branch=development)](https://travis-ci.org/julienroger/humi)
 
 # Humi
 
